@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+    <head>
+        <title>SEIR Pandemic Model</title>
+        <link rel="stylesheet" type="text/css" href="./src/style.css"/>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="src/ui.js"></script>
+        <script type="text/javascript" src="src/SEIR.js"></script>
+        <script type="text/javascript" src="src/Chart.js"></script>
+    </head>
+
+    <body>
+        <div class="row">
+            <div class="column">
+                <h3>Model Parameters</h3>
+                <div class="parameters">
+                    <div class="parameter">
+                        <div class="parameterName">&beta;</div>
+                        <div class="slidecontainer">
+                            <input type="range" min="0" max="1000" value="666" class="slider" id="betaRange"/>
+                            <div class="parameterValue" id="betaValue"></div>
+                        </div>
+                        <div class="parameterDescription">
+                            The infection rate, &beta;, is the probability of transmitting the virus from the infected
+                            (I) or exposed (E) population to the susceptable (S) population. For COVID-19: ~ (2-4) ppl/day
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <div class="parameterName">1 / &sigma;</div>
+                        <div class="slidecontainer">
+                            <input type="range" min="0" max="1000" value="666" class="slider" id="incubationDurationRange"/>
+                            <div class="parameterValue" id="incubationDurationValue"></div>
+                        </div>
+                        <div class="parameterDescription">
+                            The incubation duration is the average amount of time that the population stays in the
+                            exposed state (E) before moving to the infected state (I). For COVID-19 this value is around
+                            5.1 days.
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <div class="parameterName"> 1 / &gamma;</div>
+                        <div class="slidecontainer">
+                            <input type="range" min="0" max="1000" value="666" class="slider" id="recoveryRateRange"/>
+                            <div class="parameterValue" id="recoveryRateValue"></div>
+                        </div>
+
+                        <div class="parameterDescription">
+                            The recovery rate is the average amount of time a person stays in the infectious state
+                            before moving to the removed or recovered state (R), this value is around 14 days for
+                            COVID-19.
+                        </div>
+                    </div>
+                </div>
+                <h3>Initial Conditions</h3>
+                <div class="parameters">
+                    <div class="parameter">
+                        <div class="parameterName">S</div>
+                        <div class="stateInput">
+                            <input type="text" id="S0" value="15e6" onchange="makeChart()">
+                        </div>
+                        <div class="stateDescription">
+                            The susceptible state (S) is the number of people in the population who have not been
+                            exposed or infected by the virus. We can use the population of British Columbia (15 million
+                            people) as an initial population.
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <div class="parameterName">E</div>
+                        <div class="stateInput">
+                            <input type="text" id="E0" value="1" onchange="makeChart()" />
+                        </div>
+                        <div class="stateDescription">
+                            The exposed state (E) is the number of people in the population who have been exposed to the
+                            virus.
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <div class="parameterName">I</div>
+                        <div class="stateInput">
+                            <input type="text"  id="I0" value="0" onchange="makeChart()" />
+                        </div>
+                        <div class="stateDescription">
+                            The infected state (I) is the number of people in the population who have been infected by
+                            the virus.
+                        </div>
+                    </div>
+                    <div class="parameter">
+                        <div class="parameterName">R</div>
+                        <div class="stateInput">
+                            <input type="text"  id="R0" value="0" onchange="makeChart()" />
+                        </div>
+                        <div class="stateDescription">
+                            The removed state (R) is the number of people in the population who have recovered from the
+                            infection or died. In this model, survivors in this state cannot be re-infected.
+                        </div>
+                    </div>
+
+                </div>
+                <h3>Results</h3>
+                <div class="parameters">
+                    <div class="parameter">
+                        The virus ran it's course in <div id="lastDay"></div> days.
+                    </div>
+                    <div class="parameter">
+                        The peak infection happened on day <div id="peakInfectionDay"></div> at <div id="peakInfectionNumber"></div> people.
+                    </div>
+                    <div class="parameter">
+                        At the end of the pandemic there were <div id="uninfected"></div> uninfected people.
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div id="chart_div"/>
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+            make_slider("betaRange", "betaValue", 0.0, 5.0);
+            make_slider("incubationDurationRange", "incubationDurationValue", 1, 10);
+            make_slider("recoveryRateRange", "recoveryRateValue", 3, 20);
+        </script>
+    </body>
+</html>
