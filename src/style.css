@@ -5,6 +5,7 @@
 }
 
 body {
+    font-family: Arial, Helvetica, sans-serif;
     width: 100%;
     height: 100%;
     margin-top: auto;
@@ -15,40 +16,47 @@ body {
 }
 
 div {
-    border: 1px dotted;
+    border-radius: 5px;
 }
 
 div.row {
     width: 100%;
     height: 600px;
+    background-color: lightblue;
+    vertical-align: top;
 }
 
 div.parameters { /* contains parameters */
     width: 100%;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    background-color: azure;
 }
 
 div.parameter {
-    width:100%;
+    width: 100%;
     padding: 3px;
 }
 
 div.parameterName {
-    display:inline-block;
-    width:4%;
+    display: inline-block;
+    width: 4%;
     text-align: center;
     vertical-align: top;
+    color: white;
+    background-color: cornflowerblue;
 }
 
 div.parameterValue {
-    display:inline-block;
-    width:100%;
+    display: inline-block;
+    width: 100%;
     text-align: center;
 }
 
 div.stateInput {
     vertical-align: top;
-    display:inline-block;
-    width:13%;
+    display: inline-block;
+    width: 13%;
     align-content: center;
 }
 
@@ -56,12 +64,16 @@ div.parameterDescription {
     width: 74%;
     display: inline-block;
     padding: 2px;
+    color: white;
+    background-color: cornflowerblue;
 }
 
 div.stateDescription {
-    width: 80% ;
+    width: 80%;
     display: inline-block;
-    border-left-width: 3px;
+    padding: 2px;
+    color: white;
+    background-color: cornflowerblue;
 }
 
 div.resultLine {
@@ -96,7 +108,7 @@ div.column {
     -webkit-appearance: none; /* Override default CSS styles */
     appearance: none;
     width: 99%; /* Full-width */
-    /*height: 25px;*/ /* Specified height */
+    height: 25px; /* Specified height */
     background: #d3d3d3; /* Grey background */
     outline: lightgrey; /* Remove outline */
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
@@ -108,7 +120,9 @@ div.column {
     opacity: 1; /* Fully shown on mouse-over */
 }
 
-script,title {
+
+
+script, title {
     display: none;
 }
 
@@ -128,6 +142,16 @@ div.applyContainer {
 div.applyButton {
     text-align: center;
     height: 60px;
+}
+
+h3 {
+    background-color: cornflowerblue;
+    color: white;
+    text-emphasis: darkgreen;
+    vertical-align: top;
+    margin: 2px;
+    padding: 3px;
+    border-radius: 3px;
 }
 
 

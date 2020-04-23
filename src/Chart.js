@@ -1,5 +1,5 @@
 //google.charts.load('current', {packages: ['corechart', 'line']});
-google.charts.load("visualization", "1", {packages:["corechart"], "callback": makeChart});
+google.charts.load("visualization", "1", {packages: ["corechart"], "callback": makeChart});
 google.charts.setOnLoadCallback(makeChart);
 var chart;
 var data;
@@ -11,19 +11,20 @@ function setSummary(pts) {
     document.getElementById("lastDay").innerText = pts.length;
     var peakInfectedDay = 0;
 
-    pts.forEach(function(pt){
+    pts.forEach(function (pt) {
         if (pt[3] > pts[peakInfectedDay][3]) {
             peakInfectedDay = pt[0];
             console.log(peakInfectedDay)
         }
     });
 
+    lastDay = pts[pts.length - 1];
+
     document.getElementById("peakInfectionDay").innerText = peakInfectedDay;
     document.getElementById("peakInfectionNumber").innerText = pts[peakInfectedDay][3];
-    document.getElementById("uninfected").innerText = pts[pts.length-1][1];
-
-
-
+    document.getElementById("uninfected").innerText = lastDay[1];
+    document.getElementById("dead").innerText = Math.round(0.04 * lastDay[4]);
+    document.getElementById("peakDead").innerText = Math.round(0.04 *  pts[peakInfectedDay][4]);
 
 
 }
@@ -78,8 +79,8 @@ function makeChart() {
 
     chart.draw(data, {
         title: 'The SEIR Model of Virus Transmission',
-        hAxis: { title: 'Days', minValue: 0, maxValue: pts[pts.length-1][0] },
-        vAxis: { title: 'Population', minValue: 0, maxValue: 1.0 },
+        hAxis: {title: 'Days', minValue: 0, maxValue: pts[pts.length - 1][0]},
+        vAxis: {title: 'Population', minValue: 0, maxValue: 1.0},
         width: chartParent.offsetWidth * 0.98,
         height: chartParent.offsetHeight * 0.98,
     });

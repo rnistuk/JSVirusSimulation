@@ -1,4 +1,3 @@
-
 /**
  * @return {number}
  */
@@ -29,7 +28,7 @@ function DR(beta, sigma, gamma, S, E, I, R) {
 
 function next(beta, sigma, gamma, S, E, I, R, N) {
     dt = 1.0 / N;
-    for (let i=0; i<N; ++i) {
+    for (let i = 0; i < N; ++i) {
         let dS = DS(beta, sigma, gamma, S, E, I, R);
         let dE = DE(beta, sigma, gamma, S, E, I, R);
         let dI = DI(beta, sigma, gamma, S, E, I, R);
@@ -39,19 +38,19 @@ function next(beta, sigma, gamma, S, E, I, R, N) {
         I += dI * dt;
         R += dR * dt;
     }
-    return {S,E,I,R};
+    return {S, E, I, R};
 }
 
 function generateDataPoints(beta, sigma, gamma, S, E, I, R) {
     let day = 0;
     let pts = [];
-    while (E > 0.5 || I > 0.5 ) {
+    while (E > 0.5 || I > 0.5) {
         pts.push([day,
             Math.round(S),
             Math.round(E),
             Math.round(I),
             Math.round(R)]);
-        const {E: E0, I: I0, R: R0, S: S0} = next(beta, sigma, gamma, S, E, I, R, 100);
+        const {E: E0, I: I0, R: R0, S: S0} = next(beta, sigma, gamma, S, E, I, R, 25);
         S = S0;
         E = E0;
         I = I0;
